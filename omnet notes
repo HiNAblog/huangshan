@@ -1,0 +1,6 @@
+在交换机里实现ECN+RED
+将ECNecho标记添加到TCPsegment数据包中
+在networklayer IPv4中实现CE标志位的读取，并通知传输层该数据包被ECN标记。、、、但是TCPSegment是在TCP中定义的，没法儿直接在网络层给加上ECNecho标记。
+然而哈哈哈哈，IPv4controlinfo里面直接能getECN的值，可以直接在传输层读取，太良心了！(发现这都是骗人的，还得转换来转换去……)
+SYN建立连接、FIN断开连接、RST重新连接、PSH表示有DATA数据传输 
+成功在接收端处理ECN咯，现在实现没收到一个ECN标记的数据包就生成并返回一个带有ECNecho的ACK
